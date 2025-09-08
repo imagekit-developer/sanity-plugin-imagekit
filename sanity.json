@@ -1,0 +1,10 @@
+{
+  "name": "sanity-plugin-imagekit",
+  "version": "1.0.0",
+  "description": "ImageKit integration for Sanity Studio V3.",
+  "main": "lib/index.js",
+  "sanity": {
+    "name": "imagekit",
+    "title": "ImageKit"
+  }
+}
