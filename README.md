@@ -1,6 +1,14 @@
-# Sanity Plugin ImageKit
+[<img width="250" alt="ImageKit.io" src="https://raw.githubusercontent.com/imagekit-developer/imagekit-javascript/master/assets/imagekit-light-logo.svg"/>](https://imagekit.io)
+
+# Sanity Plugin for ImageKit.io
+
+[![npm version](https://img.shields.io/npm/v/sanity-plugin-imagekit)](https://www.npmjs.com/package/sanity-plugin-imagekit)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Twitter Follow](https://img.shields.io/twitter/follow/imagekitio?label=Follow&style=social)](https://twitter.com/ImagekitIo)
 
 A Sanity Studio plugin that integrates ImageKit's media library for seamless asset management.
+
+ImageKit is a complete media storage, optimization, and transformation solution with an image and video CDN. It integrates with your existing infrastructure (AWS S3, web servers, CDN, custom domains) to deliver optimized images in minutes with minimal code changes.
 
 ## Features
 
