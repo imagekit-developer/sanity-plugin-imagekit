@@ -7,16 +7,22 @@
     "sanity-plugin",
     "imagekit"
   ],
-  "homepage": "https://github.com/sanity-io/sanity-plugin-imagekit#readme",
+  "homepage": "https://github.com/imagekit-developer/sanity-plugin-imagekit",
   "bugs": {
-    "url": "https://github.com/sanity-io/sanity-plugin-imagekit/issues"
+    "url": "https://github.com/imagekit-developer/sanity-plugin-imagekit/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:sanity-io/sanity-plugin-imagekit.git"
+    "url": "git@github.com:imagekit-developer/sanity-plugin-imagekit.git"
   },
   "license": "MIT",
-  "author": "Sanity.io <hello@sanity.io>",
+  "author": "ImageKit Developer <developer@imagekit.io>",
+  "contributors": [
+    {
+      "name": "Harshit Budhraja",
+      "email": "harshit@imagekit.io"
+    }
+  ],
   "type": "module",
   "exports": {
     ".": {
