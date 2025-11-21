@@ -12,26 +12,29 @@ ImageKit is a complete media storage, optimization, and transformation solution 
 
 ## Table of Contents
 
-1. [Features](#features)
-2. [Prerequisites](#prerequisites)
-3. [Installation](#installation)
-4. [Configuration](#configuration)
-5. [Usage](#usage)
-6. [How It Works](#how-it-works)
-7. [Asset Data Structure](#asset-data-structure)
-8. [Advanced Topics](#advanced-topics)
-9. [Contributing](#contributing)
-10. [License](#license)
-11. [Support](#support)
+- [Sanity Plugin for ImageKit.io](#sanity-plugin-for-imagekitio)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Usage](#usage)
+    - [ImageKit as an asset source](#imagekit-as-an-asset-source)
+    - [ImageKit as a custom schema type](#imagekit-as-a-custom-schema-type)
+  - [Asset Data Structure](#asset-data-structure)
+  - [Advanced Topics](#advanced-topics)
+    - [Working with Asset URLs](#working-with-asset-urls)
+    - [Accessing Asset Metadata in Your Frontend](#accessing-asset-metadata-in-your-frontend)
+    - [Custom Metadata](#custom-metadata)
+  - [Contributing](#contributing)
+  - [License](#license)
+  - [Support](#support)
 
 ## Features
 
 - **Media Library Integration**: Browse and manage your ImageKit media library directly in Sanity Studio
 - **Asset Source Integration**: Integrates seamlessly with Sanity's image fields
 - **Custom Schema Support**: Provides `imagekit.asset` schema type for custom configurations
-- **Full-Width Dialog**: Opens ImageKit media library in a full-screen modal dialog
 - **Rich Asset Data**: Access complete asset metadata including dimensions, file size, and more.
-- **TypeScript Support**: Full type safety with proper interfaces
 - **No Configuration Required**: Works out of the box without additional configuration
 - **Video Support**: Browse and select both images and video content from ImageKit
 - **Asset Preview**: View thumbnails and asset information before selection
@@ -43,7 +46,6 @@ Before you begin, you need:
 - A Sanity Studio project (v3 or later)
 - Node.js and npm/yarn installed
 - An [ImageKit account](https://imagekit.io/registration/) (sign up if you don't have one)
-- ImageKit API credentials (Public Key, Private Key, and URL Endpoint)
 
 You can refer to Sanity's [official documentation](https://www.sanity.io/docs) to understand the prerequisites for setting up your Sanity Studio instance.
 
@@ -62,9 +64,14 @@ yarn add sanity-plugin-imagekit
 pnpm install sanity-plugin-imagekit
 ```
 
-## Configuration
+## Usage
 
-### Step 1: Add the Plugin to Your Sanity Config
+This package exports two plugins:
+- `imagekitAssetSourcePlugin` - use this if you intend to use ImageKit as an asset source for image fields in your Sanity Studio.
+- `imagekitSchemaPlugin` - use this if you intend to define a custom schema type that stores comprehensive asset metadata from ImageKit, allowing you to access detailed information about each asset in your content.
+### ImageKit as an asset source
+
+To start using this plugin, first import it from the package in your `sanity.config.ts`.
 
 ```typescript
 // sanity.config.ts
@@ -81,17 +88,9 @@ export default defineConfig({
 })
 ```
 
-The plugin will now be available as an asset source for image fields in your Sanity Studio.
+Once done, the plugin will now be available as an asset source for image fields in your Sanity Studio. When you add an image field to your schema, ImageKit will automatically appear as an option in the asset source dropdown.
 
-## Usage
-
-### Using ImageKit with Image Fields
-
-ImageKit can be used as an asset source for regular Sanity image fields. When you add an image field to your schema, ImageKit will automatically appear as an option in the asset source dropdown.
-
-#### Option 1: Using Regular Image Fields
-
-For most use cases, simply use the standard Sanity image field:
+For most use cases, you can simply use the standard Sanity image field like:
 
 ```typescript
 {
@@ -102,15 +101,15 @@ For most use cases, simply use the standard Sanity image field:
 }
 ```
 
-**How to use:**
-1. Click on the image field in your document
-2. Select "ImageKit" from the asset source dropdown
-3. Browse your ImageKit media library
-4. Select the image you want to use
+<img src="./static/imagekit-asset-source-plugin.png">
 
-#### Option 2: Using Custom ImageKit Asset Type
+### ImageKit as a custom schema type
 
-For more control, use the custom `imagekit.asset` schema type:
+For more control, you can also use the custom `imagekit.asset` schema type.
+
+<img src="./static/imagekit-schema-type-plugin.png">
+
+To do this, first import the `imagekitSchemaPlugin` from the package.
 
 ```typescript
 import { imagekitSchemaPlugin } from 'sanity-plugin-imagekit'
@@ -128,19 +127,6 @@ plugins: [imagekitSchemaPlugin()]
 ```
 
 This custom type stores comprehensive asset metadata from ImageKit, allowing you to access detailed information about each asset in your content.
-
-## How It Works
-
-The plugin provides a seamless workflow for selecting and managing ImageKit assets:
-
-1. **Access Asset Source**: Click on an image field in your Sanity document
-2. **Select ImageKit**: Choose "ImageKit" from the asset source dropdown menu
-3. **Browse Media Library**: A full-screen dialog opens displaying your ImageKit media library
-4. **Search and Filter**: Use ImageKit's search functionality to find specific assets
-5. **Select Asset**: Click on an image or video to select it
-6. **Confirm Selection**: The asset is automatically added to your document with all relevant metadata
-
-The plugin maintains a direct connection to your ImageKit account, ensuring you always have access to your latest media assets without the need for manual syncing or imports.
 
 ## Asset Data Structure
 
@@ -162,7 +148,7 @@ When you select an image from ImageKit, it's stored with the following comprehen
 }
 ```
 
-NOTE: Since Sanity Studio expects object keys to be matching the regex `/^\$?[a-zA-Z0-9_-]+$/` and ImageKit's Custom Metadata allows characters outside of this set, this plugin sanitizes the keys to replace non-supported characters with underscore i.e. `_`.
+**NOTE**: Since Sanity Studio expects object keys to be matching the regex `/^\$?[a-zA-Z0-9_-]+$/` and ImageKit's Custom Metadata allows characters outside of this set, this plugin sanitizes the keys to replace non-supported characters with underscore i.e. `_`.
 
 ## Advanced Topics
 
