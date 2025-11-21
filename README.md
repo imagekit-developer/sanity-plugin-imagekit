@@ -162,6 +162,8 @@ When you select an image from ImageKit, it's stored with the following comprehen
 }
 ```
 
+NOTE: Since Sanity Studio expects object keys to be matching the regex `/^\$?[a-zA-Z0-9_-]+$/` and ImageKit's Custom Metadata allows characters outside of this set, this plugin sanitizes the keys to replace non-supported characters with underscore i.e. `_`.
+
 ## Advanced Topics
 
 ### Working with Asset URLs
