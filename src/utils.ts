@@ -172,12 +172,14 @@ export const openMediaSelector = (
 
     sanitizedData.data.forEach((asset) => {
       if (asset.customMetadata) {
+        const customMetadata: ImageKitAssetResponse['customMetadata'] = {}
         Object.keys(asset.customMetadata).forEach((key: string) => {
           if (!sanityAllowedRegex.test(key)) {
             // Replace the key with a sanitized version i.e. replace invalid characters with an underscore
-            asset.customMetadata[key.replace(/[^a-zA-Z0-9_-]/g, '_')] = asset.customMetadata[key]
+            customMetadata[key.replace(/[^a-zA-Z0-9_-]/g, '_')] = asset.customMetadata[key]
           }
         })
+        asset.customMetadata = customMetadata
       }
     })
 
