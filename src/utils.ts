@@ -161,11 +161,27 @@ export const openMediaSelector = (
       'previewUrl',
       'description',
     ]
-    
-    return {
+
+    const sanitizedData: MLCallbackPayload = {
       eventType: payload.eventType,
       data: payload.data.map((asset) => pick(asset, fieldsToBePicked))
     }
+
+    // To make sure custom metadata is sanitized
+    const sanityAllowedRegex = /^\\$?[a-zA-Z0-9_-]+$/
+
+    sanitizedData.data.forEach((asset) => {
+      if (asset.customMetadata) {
+        Object.keys(asset.customMetadata).forEach((key: string) => {
+          if (!sanityAllowedRegex.test(key)) {
+            // Replace the key with a sanitized version i.e. replace invalid characters with an underscore
+            asset.customMetadata[key.replace(/[^a-zA-Z0-9_-]/g, '_')] = asset.customMetadata[key]
+          }
+        })
+      }
+    })
+
+    return sanitizedData
   }
 
   // Create callback for asset selection
