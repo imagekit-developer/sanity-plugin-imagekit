@@ -1,6 +1,5 @@
 import React, {useCallback} from 'react'
 import {AssetSourceComponentProps} from 'sanity'
-import {ImageKitAsset} from '../types'
 import {InsertHandlerParams} from '../types'
 import {openMediaSelector} from '../utils'
 
