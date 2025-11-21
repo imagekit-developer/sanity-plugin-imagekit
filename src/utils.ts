@@ -1,6 +1,14 @@
 import {ImagekitMediaLibraryWidget, MediaLibraryWidgetOptions} from 'imagekit-media-library-widget'
 import {ImageKitAssetResponse, InsertHandlerParams} from './types'
 
+// Helper function to pick only the fields that are needed from the ImageKit asset response
+const pick = <T, K extends keyof T>(obj: T, keys: K[]): Pick<T, K> => {
+  return keys.reduce((acc, key) => {
+    acc[key] = obj[key]
+    return acc
+  }, {} as Pick<T, K>)
+}
+
 export const openMediaSelector = (
   multiple: boolean,
   insertHandler: (params: InsertHandlerParams) => void,
@@ -125,6 +133,39 @@ export const openMediaSelector = (
         showCloseButton: false,
       },
     },
+  }
+
+  // Sanitize the payload received from ImageKit to pick only the fields that are needed
+  const sanitizedPayload = (payload: {eventType: string; data: ImageKitAssetResponse[]}) => {
+    const fieldsToBePicked: (keyof ImageKitAssetResponse)[] = [
+      'AITags',
+      'createdAt',
+      'customCoordinates',
+      'customMetadata',
+      'embeddedMetadata',
+      'fileId',
+      'filePath',
+      'fileType',
+      'hasAlpha',
+      'height',
+      'isPrivateFile',
+      'isPublished',
+      'mime',
+      'name',
+      'url',
+      'width',
+      'extensionStatus',
+      'versionInfo',
+      'createdBy',
+      'permission',
+      'previewUrl',
+      'description',
+    ]
+    
+    return {
+      eventType: payload.eventType,
+      data: payload.data.map((asset) => pick(asset, fieldsToBePicked))
+    }
   }
 
   // Create callback for asset selection
