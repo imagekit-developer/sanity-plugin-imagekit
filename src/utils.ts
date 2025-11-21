@@ -1,5 +1,5 @@
 import {ImagekitMediaLibraryWidget, MediaLibraryWidgetOptions} from 'imagekit-media-library-widget'
-import {ImageKitAssetResponse, InsertHandlerParams} from './types'
+import {ImageKitAssetResponse, InsertHandlerParams, MLCallbackPayload} from './types'
 
 // Helper function to pick only the fields that are needed from the ImageKit asset response
 const pick = <T, K extends keyof T>(obj: T, keys: K[]): Pick<T, K> => {
@@ -136,7 +136,7 @@ export const openMediaSelector = (
   }
 
   // Sanitize the payload received from ImageKit to pick only the fields that are needed
-  const sanitizedPayload = (payload: {eventType: string; data: ImageKitAssetResponse[]}) => {
+  const sanitizePayload = (payload: MLCallbackPayload): MLCallbackPayload => {
     const fieldsToBePicked: (keyof ImageKitAssetResponse)[] = [
       'AITags',
       'createdAt',
@@ -169,11 +169,12 @@ export const openMediaSelector = (
   }
 
   // Create callback for asset selection
-  const callback = (payload: {eventType: string; data: ImageKitAssetResponse[]}) => {
-    if (payload.eventType === 'INSERT' && payload.data && payload.data.length > 0) {
+  const callback = (payload: MLCallbackPayload) => {
+    const sanitizedPayload: MLCallbackPayload = sanitizePayload(payload)
+    if (sanitizedPayload.eventType === 'INSERT' && sanitizedPayload.data && sanitizedPayload.data.length > 0) {
       // No asset transformation required
       // Just insert the assets as we receive them from ImageKit
-      insertHandler({assets: payload.data})
+      insertHandler({assets: sanitizedPayload.data})
       closeModal()
     }
   }

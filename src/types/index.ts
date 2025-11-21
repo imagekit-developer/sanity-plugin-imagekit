@@ -81,3 +81,8 @@ declare global {
     ImagekitMediaLibraryWidget: any
   }
 }
+
+export interface MLCallbackPayload {
+  eventType: string
+  data: ImageKitAssetResponse[]
+}
