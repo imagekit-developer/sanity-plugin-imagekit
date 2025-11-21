@@ -168,7 +168,7 @@ export const openMediaSelector = (
     }
 
     // To make sure custom metadata is sanitized
-    const sanityAllowedRegex = /^\\$?[a-zA-Z0-9_-]+$/
+    const sanityAllowedRegex = /^\$?[a-zA-Z0-9_-]+$/
 
     sanitizedData.data.forEach((asset) => {
       if (asset.customMetadata) {
