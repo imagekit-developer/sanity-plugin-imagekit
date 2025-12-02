@@ -101,13 +101,13 @@ For most use cases, you can simply use the standard Sanity image field like:
 }
 ```
 
-<img src="./static/imagekit-asset-source-plugin.png">
+<img src="https://raw.githubusercontent.com/imagekit-developer/sanity-plugin-imagekit/main/static/imagekit-asset-source-plugin.png">
 
 ### ImageKit as a custom schema type
 
 For more control, you can also use the custom `imagekit.asset` schema type.
 
-<img src="./static/imagekit-schema-type-plugin.png">
+<img src="https://raw.githubusercontent.com/imagekit-developer/sanity-plugin-imagekit/main/static/imagekit-schema-type-plugin.png">
 
 To do this, first import the `imagekitSchemaPlugin` from the package.
 
