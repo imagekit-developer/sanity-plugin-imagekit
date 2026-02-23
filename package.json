@@ -1,7 +1,7 @@
 {
   "name": "sanity-plugin-imagekit",
-  "version": "1.0.0",
-  "description": "ImageKit integration for Sanity Studio V3.",
+  "version": "1.0.1",
+  "description": "ImageKit integration for Sanity Studio. Supports Studio V3, V4, and V5.",
   "keywords": [
     "sanity",
     "sanity-plugin",
@@ -92,7 +92,7 @@
   "peerDependencies": {
     "react": "^18.3 || ^19",
     "react-dom": "^18.3 || ^19",
-    "sanity": "^3 || ^4.0.0-0",
+    "sanity": "^3 || ^4 || ^5",
     "styled-components": "^6.0"
   },
   "engines": {
